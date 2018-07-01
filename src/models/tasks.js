@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { createSelector } from "reselect";
-import { combineDispatchToAction, createActionBuilderFactory, toHandler } from "../utilities/models";
+import { combineDispatchToAction, createActionBuilderFactory, toReducer } from "../utilities/models";
 
 
 const TASK_NAME = 'tasks';
@@ -11,13 +11,13 @@ const taskActions = {
   create: buildTaskAction('create')
 };
 
-const taskDataReducer = toHandler({
+const taskDataReducer = toReducer({
   [taskActions.create]: (state, task) => {
     return { ...state, [task.id]: task };
   }
 }, {});
 
-const taskListReducer = toHandler({
+const taskListReducer = toReducer({
   [taskActions.create]: (state, task) => {
     return [...state, task.id];
   }
