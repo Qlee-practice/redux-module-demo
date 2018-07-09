@@ -3,6 +3,7 @@ import { TaskModule } from '../../models/tasks';
 import { Process } from "../../utilities/process";
 import { createTask } from "../tasks";
 import * as TasksApi from '../../apis/tasks';
+import { makePromise } from "../../redux-middlewares/make-promise";
 
 jest.mock('../../apis/tasks');
 
@@ -14,7 +15,7 @@ describe('Task Module', () => {
       [TaskModule.name]: TaskModule.reducers
     });
 
-    const store = createStore(reducers, applyMiddleware(Process.register));
+    const store = createStore(reducers, applyMiddleware(Process.register, makePromise));
 
     it('should add new task to task list', async () => {
       TasksApi.create.mockImplementation(async taskName => ({ id: 1, name: taskName, done: false }));

@@ -19,6 +19,7 @@ export const toggleTask = Process.create(
 
 export const createTask = Process.create(
   [TaskModule.actions, toggleTask],
+
   (taskActions, toggleTask) => async taskName => {
     if (!taskName) throw new Error('Task name can not be empty');
 
