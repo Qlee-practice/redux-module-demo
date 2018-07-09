@@ -6,17 +6,15 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { TaskModule } from "./models/tasks";
 import { makePromise } from "./redux-middlewares/make-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { combineProcess } from "./redux-middlewares/combine-process";
-import { createTask } from "./processes/tasks";
 import 'toastr/build/toastr.min.css';
+import { Process } from "./utilities/process";
 
 const reducers = combineReducers({
   [TaskModule.name]: TaskModule.reducers
 });
 
-const processes = combineProcess(createTask);
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(processes, makePromise)));
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(Process.register, makePromise)));
 
 class App extends Component {
   render() {

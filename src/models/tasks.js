@@ -8,17 +8,22 @@ const TASK_NAME = 'tasks';
 const buildTaskAction = createActionBuilderFactory(TASK_NAME);
 
 const taskActions = {
-  create: buildTaskAction('create')
+  add: buildTaskAction('add'),
+  patch: buildTaskAction('patch')
 };
 
 const taskDataReducer = toReducer({
-  [taskActions.create]: (state, task) => {
+  [taskActions.add]: (state, task) => {
     return { ...state, [task.id]: task };
+  },
+  [taskActions.patch]: (state, task) => {
+    const prevTask = state[task.id];
+    return { ...state, [task.id]: { ...prevTask, ...task } };
   }
 }, {});
 
 const taskListReducer = toReducer({
-  [taskActions.create]: (state, task) => {
+  [taskActions.add]: (state, task) => {
     return [...state, task.id];
   }
 }, []);
@@ -36,7 +41,8 @@ const taskSelector = {
   tasks: createSelector(
     [getList, getDate],
     (list, data) => list.map(id => data[id])
-  )
+  ),
+  task: taskId => state => state[TASK_NAME].data[taskId]
 };
 
 export const TaskModule = {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import logo from '../logo.svg';
 import { connect } from "react-redux";
 import { TaskModule } from "../models/tasks";
-import { createTask } from '../processes/tasks';
+import { createTask, toggleTask } from '../processes/tasks';
 import toastr from 'toastr';
 
 class HomeComponent extends React.Component {
@@ -19,6 +19,10 @@ class HomeComponent extends React.Component {
     this.props.createTask(this.state.taskName)
       .then(() => this.setState({ taskName: '' }))
       .catch(e => toastr.error(e.message));
+  };
+
+  toggleTask = event => {
+    this.props.toggleTask(event.target.value).catch(e => toastr.error(e.message));
   };
 
   render() {
@@ -37,7 +41,10 @@ class HomeComponent extends React.Component {
 
   renderTasks() {
     const { tasks } = this.props;
-    return tasks.map(task => <li key={ task.id }>{ task.name }</li>);
+    return tasks.map(task => <li key={ task.id }>
+      <input type="checkbox" checked={ task.done } value={ task.id } onChange={ this.toggleTask }/>
+      <span>{ task.name }</span>
+    </li>);
   }
 }
 
@@ -46,15 +53,16 @@ HomeComponent.propTypes = {
   createTask: PropTypes.func,
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
     tasks: TaskModule.selector.tasks(state)
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    createTask: createTask.action(dispatch)
+    createTask: createTask(dispatch),
+    toggleTask: toggleTask(dispatch)
   };
 };
 

@@ -1138,7 +1138,7 @@ browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   dependencies:
     buffer-xor "^1.0.3"
     cipher-base "^1.0.0"
-    create-hash "^1.1.0"
+    add-hash "^1.1.0"
     evp_bytestokey "^1.0.3"
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
@@ -1172,8 +1172,8 @@ browserify-sign@^4.0.0:
   dependencies:
     bn.js "^4.1.1"
     browserify-rsa "^4.0.0"
-    create-hash "^1.1.0"
-    create-hmac "^1.1.2"
+    add-hash "^1.1.0"
+    add-hmac "^1.1.2"
     elliptic "^6.0.0"
     inherits "^2.0.1"
     parse-asn1 "^5.0.0"
@@ -1671,20 +1671,20 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
 
 create-ecdh@^4.0.0:
   version "4.0.3"
-  resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
+  resolved "https://registry.yarnpkg.com/add-ecdh/-/add-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
   dependencies:
     bn.js "^4.1.0"
     elliptic "^6.0.0"
 
 create-error-class@^3.0.0:
   version "3.0.2"
-  resolved "https://registry.yarnpkg.com/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
+  resolved "https://registry.yarnpkg.com/add-error-class/-/add-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
   dependencies:
     capture-stack-trace "^1.0.0"
 
 create-hash@^1.1.0, create-hash@^1.1.2:
   version "1.2.0"
-  resolved "https://registry.yarnpkg.com/create-hash/-/create-hash-1.2.0.tgz#889078af11a63756bcfb59bd221996be3a9ef196"
+  resolved "https://registry.yarnpkg.com/add-hash/-/add-hash-1.2.0.tgz#889078af11a63756bcfb59bd221996be3a9ef196"
   dependencies:
     cipher-base "^1.0.1"
     inherits "^2.0.1"
@@ -1694,10 +1694,10 @@ create-hash@^1.1.0, create-hash@^1.1.2:
 
 create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
   version "1.1.7"
-  resolved "https://registry.yarnpkg.com/create-hmac/-/create-hmac-1.1.7.tgz#69170c78b3ab957147b2b8b04572e47ead2243ff"
+  resolved "https://registry.yarnpkg.com/add-hmac/-/add-hmac-1.1.7.tgz#69170c78b3ab957147b2b8b04572e47ead2243ff"
   dependencies:
     cipher-base "^1.0.3"
-    create-hash "^1.1.0"
+    add-hash "^1.1.0"
     inherits "^2.0.1"
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
@@ -1717,9 +1717,9 @@ crypto-browserify@^3.11.0:
   dependencies:
     browserify-cipher "^1.0.0"
     browserify-sign "^4.0.0"
-    create-ecdh "^4.0.0"
-    create-hash "^1.1.0"
-    create-hmac "^1.1.0"
+    add-ecdh "^4.0.0"
+    add-hash "^1.1.0"
+    add-hmac "^1.1.0"
     diffie-hellman "^5.0.0"
     inherits "^2.0.1"
     pbkdf2 "^3.0.3"
@@ -2990,7 +2990,7 @@ got@^6.7.1:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/got/-/got-6.7.1.tgz#240cd05785a9a18e561dc1b44b41c763ef1e8db0"
   dependencies:
-    create-error-class "^3.0.0"
+    add-error-class "^3.0.0"
     duplexer3 "^0.1.4"
     get-stream "^3.0.0"
     is-redirect "^1.0.0"
@@ -4906,7 +4906,7 @@ parse-asn1@^5.0.0:
   dependencies:
     asn1.js "^4.0.0"
     browserify-aes "^1.0.0"
-    create-hash "^1.1.0"
+    add-hash "^1.1.0"
     evp_bytestokey "^1.0.0"
     pbkdf2 "^3.0.3"
 
@@ -5003,8 +5003,8 @@ pbkdf2@^3.0.3:
   version "3.0.16"
   resolved "https://registry.yarnpkg.com/pbkdf2/-/pbkdf2-3.0.16.tgz#7404208ec6b01b62d85bf83853a8064f8d9c2a5c"
   dependencies:
-    create-hash "^1.1.2"
-    create-hmac "^1.1.4"
+    add-hash "^1.1.2"
+    add-hmac "^1.1.4"
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
@@ -5432,7 +5432,7 @@ public-encrypt@^4.0.0:
   dependencies:
     bn.js "^4.1.0"
     browserify-rsa "^4.0.0"
-    create-hash "^1.1.0"
+    add-hash "^1.1.0"
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
 
