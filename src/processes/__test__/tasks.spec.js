@@ -14,11 +14,9 @@ describe('Task Module', () => {
       [TaskModule.name]: TaskModule.reducers
     });
 
-
     const store = createStore(reducers, applyMiddleware(Process.register));
 
     it('should add new task to task list', async () => {
-
       TasksApi.create.mockImplementation(async taskName => ({ id: 1, name: taskName, done: false }));
 
       TasksApi.toggle.mockReturnValue(Promise.resolve(null));
@@ -31,6 +29,8 @@ describe('Task Module', () => {
 
       expect(tasks).toEqual([{ name: taskName, done: true, id: 1 }]);
 
+      expect(TasksApi.create).toBeCalledWith(taskName);
+      expect(TasksApi.toggle).toBeCalledWith(1, true);
     });
 
   });
