@@ -20,9 +20,9 @@ describe('Task Module', () => {
     it('should add new task to task list', async () => {
       TasksApi.create.mockImplementation(async taskName => ({ id: 1, name: taskName, done: false }));
 
-      TasksApi.toggle.mockReturnValue(Promise.resolve(null));
+      // TasksApi.toggle.mockReturnValue(Promise.resolve(null));
 
-      const taskName = 'hell world';
+      const taskName = 'hello world';
 
       await createTask(store.dispatch)(taskName);
 

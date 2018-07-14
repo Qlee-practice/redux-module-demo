@@ -1,31 +1,27 @@
 import { Optional } from "./optional";
 
 
-const processes = [];
+let dispatch = () => {
+  throw new Error("Process does not register in store");
+};
+
+const processMap = new Map();
 
 export const Process = {
-  store: null,
-  create: (dependencies, handler, key) => {
-    if (!key) throw new Error('Process key is required');
-    const type = `@@Process -- ${key}`;
-    processes.push({ type, dependencies, handler });
-    return dispatch => async (...args) => dispatch({ type, payload: args });
+  create: (handler, key) => {
+    const type = Symbol(key);
+    const fn = (store, action) => handler(store.getState())(...action.payload);
+    processMap.set(type, fn);
+    return async (...args) => dispatch({ type, payload: args });
   },
 
   register: store => next => {
-    const processMap = {};
-
-    const dispatch = action => {
-      const handler = processMap[action.type];
+    dispatch = async action => {
+      const handler = processMap.get(action.type);
       return Optional.of(handler)
-        .map(run => run(action))
+        .map(run => run(store, action))
         .orElseGet(() => next(action));
     };
-
-    processes.forEach(({ type, dependencies, handler }) => {
-      const actions = dependencies.map(builder => builder(dispatch));
-      processMap[type] = (action) => handler(...actions, store.getState())(...action.payload);
-    });
 
     return dispatch;
   },

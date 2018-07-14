@@ -1,16 +1,14 @@
 import { combineReducers } from "redux";
 import { createSelector } from "reselect";
 import { combineDispatchToAction, createActionBuilderFactory, toReducer } from "../utilities/models";
-
+import { ModuleActions } from "../utilities/module-action";
 
 const TASK_NAME = 'tasks';
 
-const buildTaskAction = createActionBuilderFactory(TASK_NAME);
-
-const taskActions = {
-  add: buildTaskAction('add'),
-  patch: buildTaskAction('patch')
-};
+export const taskActions = ModuleActions.create(TASK_NAME, {
+  add: 'ADD',
+  patch: 'PATCH',
+});
 
 const taskDataReducer = toReducer({
   [taskActions.add]: (state, task) => {
@@ -47,7 +45,7 @@ const taskSelector = {
 
 export const TaskModule = {
   name: TASK_NAME,
-  actions: combineDispatchToAction(taskActions),
+  actions: taskActions,
   reducers: taskReducers,
   selector: taskSelector
 };
