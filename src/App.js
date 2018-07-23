@@ -13,7 +13,6 @@ const reducers = combineReducers({
   [TaskModule.name]: TaskModule.reducers
 });
 
-
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(Process.register, makePromise)));
 
 class App extends Component {
