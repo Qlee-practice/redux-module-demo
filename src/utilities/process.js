@@ -2,6 +2,16 @@ import { Optional } from "./optional";
 
 const processes = new Map();
 
+const buildActionsWithDispatch = (actions, dispatch) => {
+  if (actions instanceof Function) {
+    return actions(dispatch);
+  }
+  return Object.keys(actions).reduce((map, actionName) => ({
+    ...map,
+    [actionName]: actions[actionName](dispatch)
+  }), {});
+};
+
 export const Process = {
   store: null,
   create: (dependencies, handler, key) => {
@@ -24,10 +34,9 @@ export const Process = {
       return Optional.of(target)
         .map(process => {
           if (process.builtDependencies === undefined) {
-            process.builtDependencies = process.dependencies.map(builder => builder(dispatch));
+            process.builtDependencies = process.dependencies.map(actions => buildActionsWithDispatch(actions, dispatch));
           }
-          const state = process.handler.length !== process.builtDependencies ? store.getState() : null;
-          return process.handler(...process.builtDependencies, state)(...action.payload);
+          return process.handler(...process.builtDependencies, store.getState())(...action.payload);
         })
         .orElseGet(() => next(action));
     };

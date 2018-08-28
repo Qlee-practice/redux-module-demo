@@ -18,7 +18,10 @@ class HomeComponent extends React.Component {
   createTask = () => {
     this.props.createTask(this.state.taskName)
       .then(() => this.setState({ taskName: '' }))
-      .catch(e => toastr.error(e.message));
+      .catch(e => {
+        console.error(e);
+        toastr.error(e.message)
+      });
   };
 
   toggleTask = event => {
